@@ -1,0 +1,6 @@
+---
+
+# operator-cleanup vars
+operator_namespace: "operator-namespace"
+operator_subscription: "operator-subsription"
+operator_group: "operator-group"

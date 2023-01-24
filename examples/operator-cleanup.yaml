@@ -1,0 +1,6 @@
+---
+
+## operator-cleanup vars
+operator_namespace: "openshift-descheduler"
+operator_subscription: "openshift-descheduler-subscription"
+operator_group: "openshift-descheduler-operatorgroup"

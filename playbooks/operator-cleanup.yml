@@ -1,0 +1,6 @@
+---
+
+- name: Operator resource cleanup role
+  hosts: bastion
+  roles:
+  - operator-cleanup
