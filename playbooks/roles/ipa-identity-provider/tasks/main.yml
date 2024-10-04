@@ -45,9 +45,6 @@
         name: freeipa-configmap
         namespace: "{{ ipa_project_name }}"
       data:
-        CA_SUBJECT: |
-          CN=freeipa-test
-          O=FREEIPA-TEST
         DEBUG_TRACE: ""
         IPA_SERVER_HOSTNAME: "freeipa-ldap.{{ ipa_project_name }}.svc"
         REALM: IPA.EXAMPLE.COM
@@ -94,7 +91,6 @@
               - $(REALM)
               - --domain
               - $(REALM)
-              - --ca-subject=$(CA_SUBJECT)
               - --no-ntp
               - --no-sshd
               - --no-ssh
@@ -111,11 +107,6 @@
                   configMapKeyRef:
                     name: freeipa-configmap
                     key: REALM
-              - name: CA_SUBJECT
-                valueFrom:
-                  configMapKeyRef:
-                    name: freeipa-configmap
-                    key: CA_SUBJECT
               - name: IPA_ADMIN_PASSWORD
                 valueFrom:
                   secretKeyRef:
@@ -166,7 +157,6 @@
               - name: systemd-tmp
                 emptyDir:
                   medium: "Memory"
-
 
 - name: Wait until pod gets initialized
   wait_for:
