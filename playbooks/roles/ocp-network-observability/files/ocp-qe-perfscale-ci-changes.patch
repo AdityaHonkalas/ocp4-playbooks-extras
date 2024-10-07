@@ -40,10 +40,21 @@ index d44ad3f..4d811e7 100755
          echo "bucket: created new bucket $LOKI_BUCKET_NAME"
      else
 diff --git a/scripts/netobserv.sh b/scripts/netobserv.sh
-index f03cb82..a5e974a 100755
+index 9ee5d0f..68b8835 100755
 --- a/scripts/netobserv.sh
 +++ b/scripts/netobserv.sh
-@@ -172,10 +172,10 @@ deploy_downstream_catalogsource() {
+@@ -36,6 +36,10 @@ deploy_netobserv() {
+   oc apply -f $SCRIPTS_DIR/netobserv/$NOO_SUBSCRIPTION
+   sleep 60
+   oc wait --timeout=180s --for=condition=ready pod -l app=netobserv-operator -n openshift-netobserv-operator
++  
++  # Create FlowCollector
++  createFlowCollector
++
+   while :; do
+     oc get crd/flowcollectors.flows.netobserv.io && break
+     sleep 1
+@@ -180,10 +184,10 @@ deploy_downstream_catalogsource() {
    TMP_CATALOGCONFIG=/tmp/catalogconfig.yaml
    envsubst <$CatalogSource_CONFIG >$TMP_CATALOGCONFIG
  
